@@ -34,8 +34,9 @@ export class App extends Component {
         style={{
           height: '100vh',
           justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 40,
+
+          display: 'flex',
+          fontSize: 25,
           color: '#010101',
         }}
       >
@@ -44,15 +45,17 @@ export class App extends Component {
             onLeaveFeedback={this.buttonKeys}
             options={this.handleButtonClick}
           />
-          <Notification message="There is no feedback" />
-
-          <Statistics
-            good={this.state.good}
-            bad={this.state.bad}
-            neutral={this.state.neutral}
-            total={this.countTotalFeedback}
-            positivePercentage={this.countPositiveFeedbackPercentage}
-          />
+          {this.countTotalFeedback() ? (
+            <Statistics
+              good={this.state.good}
+              bad={this.state.bad}
+              neutral={this.state.neutral}
+              total={this.countTotalFeedback}
+              positivePercentage={this.countPositiveFeedbackPercentage}
+            />
+          ) : (
+            <Notification message="There is no feedback" />
+          )}
         </Section>
       </div>
     );
